@@ -6,7 +6,6 @@ import { AppsModule } from './apps/apps.module';
 import { ContextsModule } from './contexts/contexts.module';
 import { PrismaModule } from './shared/infrastructure/prisma/prisma.module';
 import { PrismaService } from './shared/infrastructure/prisma/prisma.service';
-import { ApiController } from './src/apps/api/api.controller';
 
 @Module({
   imports: [
@@ -17,7 +16,7 @@ import { ApiController } from './src/apps/api/api.controller';
     ContextsModule,
     AppsModule,
   ],
-  controllers: [AppController, ApiController],
+  controllers: [AppController],
   providers: [AppService, PrismaService],
 })
 export class AppModule {}

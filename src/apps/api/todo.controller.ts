@@ -15,25 +15,25 @@ export class TodoController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: number) {
+    findOne(@Param('id', ParseIntPipe) id: string) {
         return this.todoService.getOne(id);
     }
 
     @Post()
     create(@Body() createTodoDto: CreateTodoDto) {
-        return this.todoService.create(createTodoDto);
+        return this.todoService.create('1', createTodoDto);
     }
 
     @Patch(':id')
     update(
-        @Param('id', ParseIntPipe) id: number,
+        @Param('id', ParseIntPipe) id: string,
         @Body() updateTodoDto: UpdateTodoDto
     ) {
         return this.todoService.update(id, updateTodoDto);
     }
 
     @Delete(':id')
-    delete(@Param('id', ParseIntPipe) id: number) {
+    delete(@Param('id', ParseIntPipe) id: string) {
         return this.todoService.deleteItem(id);
     }
 }

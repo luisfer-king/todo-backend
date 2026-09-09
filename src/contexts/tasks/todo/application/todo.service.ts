@@ -11,7 +11,7 @@ export class TodoService {
         return this.todoRepository.findAll();
     }
 
-    async getOne(id: number) {
+    async getOne(id: string) {
         const todo = await this.todoRepository.getOne(id);
         if (!todo) {
             throw new NotFoundException(`Todo con id ${id} no encontrado`);
@@ -19,22 +19,27 @@ export class TodoService {
         return todo;
     }
 
-    async create(dto: CreateTodoDto) {
-        return this.todoRepository.create({
+    async create(userId: string, dto: CreateTodoDto) {
+        const todo = await this.todoRepository.create({
             title: dto.title,
+            description: dto.description || '',
             completed: false,
+            userId,
         });
+        
+        return todo;
     }
 
-    async update(id: number, dto: UpdateTodoDto) {
+    async update(id: string, dto: UpdateTodoDto) {
         await this.getOne(id);
         return this.todoRepository.update(id, {
             title: dto.title,
+            description: dto.description || '',
             completed: dto.completed,
         });
     }
 
-    async deleteItem(id: number) {
+    async deleteItem(id: string) {
         await this.getOne(id);
         return this.todoRepository.deleteItem(id);
     }

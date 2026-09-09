@@ -7,6 +7,11 @@ export class UpdateTodoDto {
     @IsOptional()
     title?: string;
 
+    @IsString()
+    @IsNotEmpty()
+    @IsOptional()
+    description?: string;
+
     @IsBoolean()
     @IsOptional()
     completed?: boolean;

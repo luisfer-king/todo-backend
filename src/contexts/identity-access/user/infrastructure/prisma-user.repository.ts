@@ -1,7 +1,9 @@
+import { Injectable } from "@nestjs/common";
 import { PrismaService } from "../../../../shared/infrastructure/prisma/prisma.service";
 import { User } from "../domain/user.entity";
 import { UserCreateData, UserRepository } from "../domain/user.repository";
 
+@Injectable()
 export class PrismaUserRepository implements UserRepository {
     constructor(private readonly prisma: PrismaService) {}
 
@@ -21,8 +23,13 @@ export class PrismaUserRepository implements UserRepository {
         return users.map((user) => this.toDomain(user));
     }
 
+    async findByEmail(email: string): Promise<User | null> {
+        const user = await this.prisma.user.findUnique({ where: { email } });
+        return user ? this.toDomain(user) : null;
+    }
+
     async create(user: UserCreateData) {
-        const row = await this.prisma.user.create(user);
+        const row = await this.prisma.user.create({ data: user });
         return this.toDomain(row);
     }
 }

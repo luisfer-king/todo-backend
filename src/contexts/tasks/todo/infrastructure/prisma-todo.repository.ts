@@ -9,7 +9,7 @@ export class PrismaTodoRepository implements TodoRepository {
     constructor(private readonly prisma: PrismaService) {}
 
     private toDomain(row: any) {
-        return new Todo(row.id, row.title, row.completed);
+        return new Todo(row.id, row.title, row.description, row.completed, row.userId);
     }
 
     async findAll() {
@@ -17,7 +17,7 @@ export class PrismaTodoRepository implements TodoRepository {
         return rows.map((row) => this.toDomain(row));
     }
 
-    async getOne(id: number) {
+    async getOne(id: string) {
         const row = await this.prisma.todo.findUnique({ where: { id } });
 
         return row ? this.toDomain(row) : null;
@@ -28,12 +28,12 @@ export class PrismaTodoRepository implements TodoRepository {
         return this.toDomain(row);
     }
 
-    async update(id: number, data: UpdateTodoData) {
+    async update(id: string, data: UpdateTodoData) {
         const row = await this.prisma.todo.update({ where: { id }, data });
         return this.toDomain(row);
     }
 
-    async deleteItem(id: number) {
+    async deleteItem(id: string) {
         await this.prisma.todo.delete({ where: { id } });
     }
 }
