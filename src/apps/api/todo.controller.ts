@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
 import { CurrentUser } from '../../contexts/identity-access/auth/infrastructure/current-user.decorator';
 import { JwtAuthGuard } from '../../contexts/identity-access/auth/infrastructure/jwt-auth.guard';
 import { CreateTodoDto } from '../../contexts/tasks/todo/application/dto/create-todo.dto';
@@ -18,7 +18,7 @@ export class TodoController {
     }
 
     @Get(':id')
-    findOne(@Param('id', ParseIntPipe) id: string) {
+    findOne(@Param('id') id: string) {
         return this.todoService.getOne(id);
     }
 
@@ -32,14 +32,14 @@ export class TodoController {
 
     @Patch(':id')
     update(
-        @Param('id', ParseIntPipe) id: string,
+        @Param('id') id: string,
         @Body() updateTodoDto: UpdateTodoDto
     ) {
         return this.todoService.update(id, updateTodoDto);
     }
 
     @Delete(':id')
-    delete(@Param('id', ParseIntPipe) id: string) {
+    delete(@Param('id') id: string) {
         return this.todoService.deleteItem(id);
     }
 }

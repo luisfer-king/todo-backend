@@ -20,7 +20,7 @@ export class PrismaTodoRepository implements TodoRepository {
     async getOne(id: string) {
         const row = await this.prisma.todo.findUnique({ where: { id } });
 
-        return row ? this.toDomain(row) : null;
+        return this.toDomain(row);
     }
 
     async create(data: CreateTodoData) {
