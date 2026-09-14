@@ -1,10 +1,27 @@
-# compiled output
-/dist
-/node_modules
-/build
+# ==========================================
+# Dependencias (Crucial para monorepos pnpm)
+# ==========================================
+node_modules/
+.pnpm-store/
+packages/*/node_modules/
 
+# ==========================================
+# Compiled Output (Backend & Frontend)
+# ==========================================
+dist/
+build/
+packages/*/dist/
+packages/*/build/
+# Frameworks de frontend comunes (por si acaso)
+.next/
+.nuxt/
+.svelte-kit/
+.vite/
+
+# ==========================================
 # Logs
-logs
+# ==========================================
+logs/
 *.log
 npm-debug.log*
 pnpm-debug.log*
@@ -12,21 +29,33 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 
-# OS
+# ==========================================
+# OS / System Files
+# ==========================================
 .DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
 
-# Tests
-/coverage
-/.nyc_output
+# ==========================================
+# Tests & Coverage
+# ==========================================
+coverage/
+.nyc_output/
+*.lcov
 
-# IDEs and editors
-/.idea
+# ==========================================
+# IDEs and Editors
+# ==========================================
+.idea/
 .project
 .classpath
 .c9/
 *.launch
 .settings/
 *.sublime-workspace
+*.code-workspace
 
 # IDE - VSCode
 .vscode/*
@@ -35,24 +64,31 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dotenv environment variable files
+# ==========================================
+# Environment Variables (¡Nunca subir estos!)
+# ==========================================
 .env
+.env.local
 .env.development.local
 .env.test.local
 .env.production.local
-.env.local
+packages/backend/.env
+packages/backend/.env.*
 
-# temp directory
-.temp
-.tmp
-
-# Runtime data
-pids
+# ==========================================
+# Temp & Runtime Data
+# ==========================================
+.temp/
+.tmp/
+pids/
 *.pid
 *.seed
 *.pid.lock
-
-# Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
-/src/generated/prisma
+# ==========================================
+# Prisma (Adaptado a estructura de paquetes)
+# ==========================================
+# El archivo schema.prisma SÍ debe subirse, pero el cliente generado NO.
+**/generated/prisma/
+node_modules/.prisma/
