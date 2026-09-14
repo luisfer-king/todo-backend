@@ -7,5 +7,8 @@
     "start:dev": "pnpm --filter backend run start:dev",
     "test": "pnpm --filter backend run test",
     "lint": "pnpm --filter backend run lint"
+  },
+  "dependencies": {
+    "@nestjs/swagger": "^12.0.1"
   }
 }
